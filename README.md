@@ -104,8 +104,7 @@ Then set the deployment URL as `VITE_API_URL` if frontend and API are hosted sep
 ├── Dockerfile              # Single-container Heroku/Docker deployment
 ├── docker-compose.yml      # Local two-container orchestration
 ├── .gitignore              # Local dependencies, build output, secrets
-├── README.md               # Setup, architecture, data and deployment notes
-└── VIDEO_SCRIPT.md         # Time-coded customer pitch and technical review guide
+└── README.md               # Setup, architecture, data and deployment notes
 ```
 
 ## Data and calculation notes
@@ -116,10 +115,5 @@ Then set the deployment URL as `VITE_API_URL` if frontend and API are hosted sep
 - Error convention: forecast minus actual. Positive bias means over-forecasting.
 - MAE = mean of absolute errors; RMSE = square root of mean squared errors; bias = mean signed error.
 - The API loads source data on request and does not persist or fabricate observations. A source/API error is shown in the UI.
-
-## Video walkthrough outline (8 minutes 30 seconds)
-
-1. **Client pitch (4:15):** explain the day-ahead cutoff, show monthly accuracy and the forecast/outturn chart, put the metrics in procurement context, then export the selected month.
-2. **Technical review (4:15):** walk through the React/Vite frontend modules and FastAPI backend services, the Elexon data path, matching and metric calculations, Docker setup, and the pilot’s scope limits. See [VIDEO_SCRIPT.md](VIDEO_SCRIPT.md) for the timed narration and screen cues.
 
 AI tools were used to assist with implementation and product copy. The code and domain assumptions should be reviewed before operational use.
