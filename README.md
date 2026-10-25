@@ -53,9 +53,12 @@ The Vite dev server proxies `/api` requests to `http://127.0.0.1:8000` by defaul
 
 ### Vercel
 
-The root `vercel.toml` configures a Vercel Services deployment with the Vite app in `frontend/` and the FastAPI app in `backend/`. Import the repository into Vercel and deploy it as one project. Requests under `/api/` are routed to FastAPI; all other paths are served by the frontend. Keep the frontend API base URL empty so it uses the same-origin `/api` route.
+The frontend and API are deployed as separate Vercel projects from this repository:
 
-For local Vercel emulation, install the Vercel CLI and run `vercel dev` from the repository root. The Python runtime requires a current Vercel CLI; see the [Vercel FastAPI deployment guide](https://vercel.com/docs/frameworks/backend/fastapi).
+- Frontend: <https://wind-desk-frontend.vercel.app>
+- Backend API: <https://wind-desk-api.vercel.app>
+
+The frontend project uses the `frontend/` root directory and sets `VITE_API_URL` to the backend URL above. The backend project uses the `backend/` root directory and the FastAPI preset. The API allows cross-origin requests for this pilot. Both projects are connected to the `main` branch of the GitHub repository and deploy on pushes.
 
 The root `Dockerfile` builds the React app and serves it from the FastAPI container, which is suitable for Heroku Container Registry or another Docker host. For Heroku, create an app, log in with the Heroku CLI, then:
 
@@ -66,7 +69,7 @@ heroku container:push web -a <anonymous-app-name>
 heroku container:release web -a <anonymous-app-name>
 ```
 
-Then set the deployment URL as `VITE_API_URL` only if frontend and API are hosted separately. For a single-container deployment, the default same-origin API path is used. The live deployment link will be added here after deployment.
+Then set the deployment URL as `VITE_API_URL` if frontend and API are hosted separately. For a single-container deployment, the default same-origin API path is used.
 
 ## Repository guide
 
@@ -100,7 +103,6 @@ Then set the deployment URL as `VITE_API_URL` only if frontend and API are hoste
 │       └── vite-env.d.ts   # Vite environment types
 ├── Dockerfile              # Single-container Heroku/Docker deployment
 ├── docker-compose.yml      # Local two-container orchestration
-├── vercel.toml             # Vercel frontend/API services and routing
 ├── .gitignore              # Local dependencies, build output, secrets
 ├── README.md               # Setup, architecture, data and deployment notes
 └── VIDEO_SCRIPT.md         # Time-coded customer pitch and technical review guide
